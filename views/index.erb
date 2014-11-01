@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>MiniMDB</title>
+	
+	<link rel="stylesheet" href="./css/index.css">
+	<link rel="stylesheet" href="./css/ladda.min.css">
+
+    <script src="./js/jquery-2.1.1.min.js"></script>
+    <script src="./js/spin.min.js"></script>
+    <script src="./js/ladda.min.js"></script>
+	<script src="./js/miniMdb.js" defer></script>
+</head>
+<body>
+	<section>
+		<%= erb :partialIndex %>
+	</section>
+	<button class="ladda-button" data-color = "blue" data-style="zoom-in"><span class="ladda-label">Search</span></button>
+	<button class="ladda-button" data-style="expand-right"><span class="ladda-label">Play the game</span></button>
+	<button class="ladda-button" data-style="expand-down"><span class="ladda-label">Play the game (Random word)</span></button>
+
+	<section id = "gameSection">
+		<ul class="gameList">
+			
+		</ul>
+
+	</section>
+
+	<section>
+		<ul>
+			<% for i in @selectedShows.keys %>
+			<li class="<%= @selectedShows[i][4] %>"><p>Title: <%= @selectedShows[i][0] %><br>Rating: <%= @selectedShows[i][1] %><br>Cover url: <%= @selectedShows[i][2] %> <br> Imdb url: <%= @selectedShows[i][3] %></p></li>
+			<% end %>
+		</ul>
+	</section>
+</body>
+</html>

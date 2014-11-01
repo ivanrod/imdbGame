@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> <%= @title %> </title>
+</head>
+<body>
+	<section>
+		<p>Which of the movies was filmed in year <%= @winnerMovie.year %>?</p>
+		<% @selectedShowsList.each do |movie| %>
+		<p> <%= movie.title %> </p>
+		<% end %>
+
+	</section>
+</body>
+</html>

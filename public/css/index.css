@@ -1,0 +1,24 @@
+.darkGreen{
+	background-color: darkgreen;
+}
+.green{
+	background-color: green;
+}
+.yellow{
+	background-color: yellow;
+}
+.red{
+	background-color: red;
+}
+
+img{
+	width:10%;
+}
+ul li{
+	text-decoration: none;
+	list-style: none;
+	display: inline;
+}
+ul div{
+	display:inline;
+}
