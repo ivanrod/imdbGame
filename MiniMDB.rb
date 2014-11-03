@@ -2,13 +2,13 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'imdb'
 require 'json'
+require './classes/GameImdb'
 
 @showHash = {}
 @showJson = @showHash.to_json
 showList = []
 selectedShows = {}
 
-randomWords = ["unlight","laird","tinklingly","abstentious","gynecomastia","unseparableness","emotionality","overcaptious","cannily","enskyed","rascally","chipper","clementine","enatic","sovetsk","destituting","maturating","overthoughtful","demoralised","underspar"]
 #index View
 get '/' do 
 	@selectedShows = selectedShows
@@ -29,36 +29,12 @@ end
 
 get '/list' do 
 	if request.xhr?
-		if gameSearchData == ""
-			@gameSearchData = randomWords.sample
-		else
-			@gameSearchData = gameSearchData
-		end
-		@years = []
-		@show = Imdb::Search.new(@gameSearchData)
-		@showList = []
-		@counter = 0
-		@winner = Random.new.rand(0..10)
-		@show.movies.each do |item|
-			if @counter>=10
-				break
-			end
-			if item.poster != nil && !(@years.include?(item.year)) && item.year != nil
-				puts item.year
-				@showList.push([item.poster, item.id, item.year])
-				if @counter == @winner
-					@winnerMovie = [item.poster, item.year] 
-				end
-				@counter += 1
-				@years.push(item.year)
-			end
-		end
-		@showHash ={'showList' => @showList, 'winnerMovie' => @winnerMovie}
-		@showJson = @showHash.to_json
-		showList = @showList
+		newGame = GameImdb.new(gameSearchData)
+		newGame.getJson
+		newGame.showJson
+		puts newGame
+		return newGame.showJson
 
-
-		return @showJson
 	else
 		return 'error'
 	end
